@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PhotoBooth Web - Photo Strip</title>
+    <title>Photobooth - VisionBooth</title>
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <style>
         * {
@@ -13,39 +13,104 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            background-color: #f1f1f1;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        h1 {
-            color: white;
-            margin-bottom: 30px;
-            font-size: 3em;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .container {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 50px rgba(0,0,0,0.3);
-            max-width: 1000px;
+            padding: 30px 60px;
+            background-color: #f1f1f1;
+            max-width: 1400px;
+            margin: 0 auto;
             width: 100%;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #101b40;
+            letter-spacing: 1px;
+            flex-shrink: 0;
+        }
+
+        .logo span {
+            display: block;
+            line-height: 1.2;
+        }
+
+        .nav-menu {
+            background-color: white;
+            border: 3px solid #101b40;
+            border-radius: 50px;
+            padding: 8px;
+            display: flex;
+            gap: 5px;
+            box-shadow: 0 4px 15px rgba(16, 27, 64, 0.1);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .nav-btn {
+            padding: 12px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: transparent;
+            color: #101b40;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-btn.active {
+            background-color: #101b40;
+            color: white;
+        }
+
+        .nav-btn:hover:not(.active) {
+            background-color: #f1f1f1;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .status-title {
+            font-size: 2.5em;
+            font-weight: 600;
+            color: #101b40;
+            margin-bottom: 30px;
+            text-align: center;
         }
 
         #videoContainer {
             position: relative;
             width: 100%;
+            max-width: 900px;
             background: #000;
-            border-radius: 15px;
+            border-radius: 20px;
             overflow: hidden;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            border: 6px solid #000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         #video, #processedFrame {
@@ -58,52 +123,78 @@
             display: none;
         }
 
-        .status {
-            background: #f0f0f0;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+        .countdown-display {
+            font-size: 6em;
+            font-weight: 700;
+            color: #101b40;
+            text-align: center;
+            margin: 20px 0;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .status-text {
-            font-size: 1.5em;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .gesture-info {
-            font-size: 1.2em;
-            color: #666;
-        }
-
-        .capture-progress {
-            font-size: 1.8em;
-            color: #667eea;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-
-        .countdown {
-            font-size: 5em;
-            color: #ff4444;
-            font-weight: bold;
+        .info-section {
             text-align: center;
             margin: 20px 0;
         }
 
+        .info-text {
+            font-size: 1.5em;
+            color: #101b40;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .action-btn {
+            padding: 15px 50px;
+            font-size: 1.2em;
+            font-weight: 700;
+            color: white;
+            background-color: #101b40;
+            border: 3px solid #101b40;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(16, 27, 64, 0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .action-btn:hover {
+            background-color: white;
+            color: #101b40;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 27, 64, 0.4);
+        }
+
+        .gesture-display {
+            font-size: 1.2em;
+            color: #000;
+            margin-top: 15px;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
         .progress-bar {
             width: 100%;
-            height: 20px;
+            height: 25px;
             background: #ddd;
-            border-radius: 10px;
+            border-radius: 50px;
             overflow: hidden;
-            margin-top: 10px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            transition: width 0.2s;
+            background: #101b40;
+            transition: width 0.3s ease;
+            border-radius: 50px;
         }
 
         #canvas {
@@ -112,112 +203,163 @@
 
         .strip-preview {
             display: none;
-            margin-top: 20px;
             text-align: center;
+            width: 100%;
         }
 
         .strip-preview.show {
             display: block;
         }
 
+        .strip-preview h2 {
+            font-size: 2.5em;
+            color: #101b40;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
         .strip-preview img {
             max-width: 400px;
             width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
             margin: 20px 0;
+            border: 5px solid #101b40;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
         }
 
         .download-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
             padding: 15px 40px;
             font-size: 1.2em;
+            font-weight: 700;
+            color: white;
+            background-color: #101b40;
+            border: 3px solid #101b40;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: transform 0.2s;
-            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(16, 27, 64, 0.3);
         }
 
         .download-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .download-btn:active {
-            transform: scale(0.98);
+            background-color: white;
+            color: #101b40;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 27, 64, 0.4);
         }
 
         .performance-info {
-            font-size: 0.9em;
+            font-size: 0.85em;
             color: #999;
-            margin-top: 10px;
+            margin-top: 15px;
+            text-align: center;
         }
 
-        .fps-indicator {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            margin-right: 5px;
+        /* Hide elements initially */
+        .hidden {
+            display: none !important;
         }
 
-        .fps-good { background-color: #4CAF50; }
-        .fps-ok { background-color: #FFC107; }
-        .fps-bad { background-color: #F44336; }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px 30px;
+            }
 
-        .quality-badge {
-            display: inline-block;
-            background: #4CAF50;
-            color: white;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.8em;
-            margin-left: 10px;
-        }
+            .nav-menu {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
 
-        .strip-badge {
-            display: inline-block;
-            background: #FF6B6B;
-            color: white;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.8em;
-            margin-left: 10px;
+            .nav-btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+
+            .main-content {
+                padding: 30px 20px;
+            }
+
+            .status-title {
+                font-size: 1.8em;
+            }
+
+            .countdown-display {
+                font-size: 4em;
+                min-height: 80px;
+            }
+
+            .info-text {
+                font-size: 1.2em;
+            }
+
+            .button-group {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>📸 PhotoBooth Web <span class="quality-badge">HD Quality</span> <span class="strip-badge">4-Photo Strip</span></h1>
-    
-    <div class="container">
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <span>VISION</span>
+            <span>BOOTH</span>
+        </div>
+        <div class="nav-menu">
+            <a href="{{ url_for('home') }}" class="nav-btn">HOME</a>
+            <a href="{{ url_for('guide') }}" class="nav-btn active">GUIDE</a>
+            <a href="{{ url_for('index') }}" class="nav-btn">PHOTOBOOTH</a>
+            <a href="{{ url_for('about') }}" class="nav-btn">ABOUT</a>
+
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="status-title" id="statusTitle">Set your timer using your fingers</div>
+
         <div id="videoContainer">
             <video id="video" autoplay playsinline></video>
             <img id="processedFrame" alt="Processed frame">
         </div>
 
-        <div class="status">
-            <div class="status-text" id="statusText">Starting...</div>
-            <div class="gesture-info" id="gestureInfo">No gesture detected</div>
-            <div class="capture-progress" id="captureProgress"></div>
-            <div id="progressContainer" style="display: none;">
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill"></div>
-                </div>
-            </div>
-            <div class="countdown" id="countdown" style="display: none;"></div>
-            <div class="performance-info" id="performanceInfo">FPS: --</div>
+        <div class="countdown-display" id="countdownDisplay"></div>
+
+        <div class="info-section">
+            <div class="info-text" id="infoText">Do a thumbs up when you're ready!</div>
+            <button class="action-btn hidden" id="resetBtn" onclick="resetSession()">Make a fist to change timer</button>
         </div>
+
+        <div class="progress-bar-container hidden" id="progressContainer">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <div class="gesture-display" id="gestureDisplay">Gesture detected: None</div>
 
         <div class="strip-preview" id="stripPreview">
             <h2>🎉 Your Photo Strip is Ready!</h2>
             <img id="stripImage" src="" alt="Photo strip">
-            <div>
+            <div class="button-group">
                 <button class="download-btn" onclick="downloadStrip()">📥 Download Strip</button>
                 <button class="download-btn" onclick="startNewStrip()">🔄 Take New Strip</button>
             </div>
         </div>
+
+        <div class="performance-info" id="performanceInfo">FPS: --</div>
     </div>
 
     <canvas id="canvas"></canvas>
@@ -228,12 +370,13 @@
         const processedFrame = document.getElementById('processedFrame');
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
-        const statusText = document.getElementById('statusText');
-        const gestureInfo = document.getElementById('gestureInfo');
-        const countdown = document.getElementById('countdown');
+        const statusTitle = document.getElementById('statusTitle');
+        const countdownDisplay = document.getElementById('countdownDisplay');
+        const infoText = document.getElementById('infoText');
+        const resetBtn = document.getElementById('resetBtn');
         const progressContainer = document.getElementById('progressContainer');
         const progressFill = document.getElementById('progressFill');
-        const captureProgress = document.getElementById('captureProgress');
+        const gestureDisplay = document.getElementById('gestureDisplay');
         const performanceInfo = document.getElementById('performanceInfo');
         const stripPreview = document.getElementById('stripPreview');
         const stripImage = document.getElementById('stripImage');
@@ -245,9 +388,8 @@
         let processingTimeout = null;
         let lastFrameTime = 0;
         let currentStripFilename = null;
-        let lastCaptureTriggered = false;  // NEW: Track if we already triggered capture
+        let lastCaptureTriggered = false;
 
-        // Performance settings
         const SCALE_FACTOR = 0.35;
         const JPEG_QUALITY = 0.5;
         const FRAME_INTERVAL = 200;
@@ -275,7 +417,7 @@
         })
         .catch(err => {
             console.error('Error accessing camera:', err);
-            statusText.textContent = 'Error: Cannot access camera';
+            statusTitle.textContent = 'Error: Cannot access camera';
         });
 
         function startSending() {
@@ -315,17 +457,7 @@
             
             if (elapsed >= 1000) {
                 const fps = Math.round((frameCount / elapsed) * 1000);
-                
-                let indicator = '';
-                if (fps >= 4) {
-                    indicator = '<span class="fps-indicator fps-good"></span>';
-                } else if (fps >= 2) {
-                    indicator = '<span class="fps-indicator fps-ok"></span>';
-                } else {
-                    indicator = '<span class="fps-indicator fps-bad"></span>';
-                }
-                
-                performanceInfo.innerHTML = `${indicator}FPS: ${fps} | Detection: ${canvas.width}x${canvas.height} | Capture: ${video.videoWidth}x${video.videoHeight}`;
+                performanceInfo.textContent = `FPS: ${fps} | Detection: ${canvas.width}x${canvas.height} | Capture: ${video.videoWidth}x${video.videoHeight}`;
                 frameCount = 0;
                 lastFpsUpdate = now;
             }
@@ -339,33 +471,19 @@
             
             canSend = true;
             
-            // Detect state changes
             const stateChanged = (currentState !== data.state);
             currentState = data.state;
             
-            // Reset capture trigger flag when state changes away from CAPTURE_DONE
             if (stateChanged && currentState !== 'CAPTURE_DONE') {
                 lastCaptureTriggered = false;
             }
             
-            // Update capture progress display
-            if (data.capture_count !== undefined && data.total_captures !== undefined) {
-                if (data.capture_count > 0) {
-                    captureProgress.textContent = `📸 Photo ${data.capture_count}/${data.total_captures} captured`;
-                    captureProgress.style.display = 'block';
-                } else {
-                    captureProgress.style.display = 'none';
-                }
-            }
-            
-            // Check if we should trigger photo capture (only once per CAPTURE_DONE state)
             if (data.trigger_capture === true && !lastCaptureTriggered) {
                 console.log('📸 Capture triggered by state update');
-                lastCaptureTriggered = true;  // Mark as triggered
+                lastCaptureTriggered = true;
                 setTimeout(() => capturePhoto(), 100);
             }
             
-            // Show processed frame (except during countdown for performance)
             if (currentState !== 'COUNTDOWN') {
                 processedFrame.src = data.frame;
                 processedFrame.style.display = 'block';
@@ -375,11 +493,10 @@
                 video.style.display = 'block';
             }
             
-            // Update gesture info
             if (data.gesture) {
-                gestureInfo.textContent = `Detected: ${data.gesture}`;
+                gestureDisplay.textContent = `Gesture detected: ${data.gesture}`;
             } else {
-                gestureInfo.textContent = 'No gesture detected';
+                gestureDisplay.textContent = 'Gesture detected: None';
             }
             
             updateStatus(data);
@@ -388,19 +505,21 @@
         function updateStatus(data) {
             const { state, timer_value, countdown: countdownValue, streak_progress, capture_count, total_captures } = data;
             
-            countdown.style.display = 'none';
-            progressContainer.style.display = 'none';
+            countdownDisplay.textContent = '';
+            progressContainer.classList.add('hidden');
+            resetBtn.classList.add('hidden');
             
             switch(state) {
                 case 'PROMPT_TIMER':
-                    statusText.textContent = 'Welcome to PhotoBooth Strip!';
-                    statusText.innerHTML += '<br><small>Show 1-5 fingers to set your timer</small>';
+                    statusTitle.textContent = 'Set your timer using your fingers';
+                    infoText.textContent = 'Do a thumbs up when you\'re ready!';
                     break;
                     
                 case 'DETECTING_FINGERS':
-                    statusText.textContent = 'Hold steady...';
+                    statusTitle.textContent = 'Hold steady...';
+                    infoText.textContent = 'Do a thumbs up when you\'re ready!';
                     if (streak_progress) {
-                        progressContainer.style.display = 'block';
+                        progressContainer.classList.remove('hidden');
                         const percent = (streak_progress.current / streak_progress.required) * 100;
                         progressFill.style.width = percent + '%';
                     }
@@ -408,37 +527,38 @@
                     
                 case 'TIMER_SET':
                 case 'AWAIT_THUMBS_UP':
-                    statusText.textContent = `Timer set to ${timer_value} seconds!`;
-                    statusText.innerHTML += '<br><small>👍 Thumbs up to START | 👊 Fist to CHANGE</small>';
-                    if (capture_count > 0) {
-                        statusText.innerHTML += `<br><small>Taking ${total_captures} photos total</small>`;
-                    }
+                    statusTitle.textContent = `Timer set to ${timer_value} seconds`;
+                    infoText.textContent = 'Do a thumbs up when you\'re ready!';
+                    resetBtn.classList.remove('hidden');
                     if (streak_progress) {
-                        progressContainer.style.display = 'block';
+                        progressContainer.classList.remove('hidden');
                         const percent = (streak_progress.current / streak_progress.required) * 100;
                         progressFill.style.width = percent + '%';
                     }
                     break;
                     
                 case 'COUNTDOWN':
-                    countdown.style.display = 'block';
                     if (countdownValue !== null && countdownValue !== undefined) {
-                        countdown.textContent = countdownValue > 0 ? countdownValue : '📸 Smile!';
-                        console.log(`⏱ Countdown: ${countdownValue}`);
+                        if (countdownValue > 0) {
+                            statusTitle.textContent = '';
+                            countdownDisplay.textContent = countdownValue;
+                            infoText.textContent = 'Pose and hold still! Taking your photos!';
+                        } else {
+                            statusTitle.textContent = '';
+                            countdownDisplay.textContent = '📸';
+                            infoText.textContent = 'Smile!';
+                        }
                     }
-                    if (capture_count > 0) {
-                        statusText.textContent = `Photo ${capture_count + 1}/${total_captures} - Get ready!`;
-                    } else {
-                        statusText.textContent = 'Get ready for first photo!';
-                    }
+                    resetBtn.classList.remove('hidden');
                     break;
                     
                 case 'CAPTURE_DONE':
                     if (capture_count < total_captures) {
-                        statusText.textContent = `Photo ${capture_count}/${total_captures} captured! 🎉`;
-                        statusText.innerHTML += '<br><small>Get ready for next photo...</small>';
+                        statusTitle.textContent = `Photo ${capture_count}/${total_captures} captured!`;
+                        infoText.textContent = 'Get ready for next photo...';
                     } else {
-                        statusText.textContent = 'Creating your photo strip...';
+                        statusTitle.textContent = 'Creating your photo strip...';
+                        infoText.textContent = 'Almost done!';
                     }
                     break;
             }
@@ -446,7 +566,6 @@
 
         function capturePhoto() {
             console.log('📸 Capture photo function called');
-            console.log(`🔍 Current capture count from last state: ${captureProgress.textContent}`);
             
             try {
                 const captureCanvas = document.createElement('canvas');
@@ -458,8 +577,6 @@
                 const imageData = captureCanvas.toDataURL('image/png');
                 
                 console.log(`✅ Image captured at ${captureCanvas.width}x${captureCanvas.height}`);
-                console.log(`📦 Image size: ${(imageData.length / 1024).toFixed(2)} KB`);
-                console.log(`⏰ Timestamp: ${new Date().toLocaleTimeString()}.${new Date().getMilliseconds()}`);
                 
                 socket.emit('save_photo', { image: imageData });
                 console.log('📤 Sent photo to server for saving\n');
@@ -472,13 +589,17 @@
             console.log('🎉 Strip ready:', data.filename);
             currentStripFilename = data.filename;
             
-            // Show the strip preview
             stripImage.src = `/${data.filename}`;
             stripPreview.classList.add('show');
             
-            // Hide video and status
             document.getElementById('videoContainer').style.display = 'none';
-            document.querySelector('.status').style.display = 'none';
+            statusTitle.style.display = 'none';
+            countdownDisplay.style.display = 'none';
+            infoText.style.display = 'none';
+            resetBtn.style.display = 'none';
+            gestureDisplay.style.display = 'none';
+            progressContainer.style.display = 'none';
+            performanceInfo.style.display = 'none';
         });
 
         socket.on('photo_received', (data) => {
@@ -487,7 +608,8 @@
 
         socket.on('photo_error', (data) => {
             console.error('❌ Photo error:', data.error);
-            statusText.innerHTML = `❌ Error: ${data.error}<br><small>Please try again</small>`;
+            statusTitle.textContent = `Error: ${data.error}`;
+            infoText.textContent = 'Please try again';
         });
 
         function downloadStrip() {
@@ -503,17 +625,21 @@
         }
 
         function startNewStrip() {
-            // Hide strip preview
             stripPreview.classList.remove('show');
             
-            // Show video and status again
             document.getElementById('videoContainer').style.display = 'block';
-            document.querySelector('.status').style.display = 'block';
-            
-            // Reset capture progress display
-            captureProgress.style.display = 'none';
+            statusTitle.style.display = 'block';
+            countdownDisplay.style.display = 'flex';
+            infoText.style.display = 'block';
+            gestureDisplay.style.display = 'block';
+            performanceInfo.style.display = 'block';
             
             console.log('🔄 Starting new strip');
+        }
+
+        function resetSession() {
+            // This is handled by the fist gesture
+            console.log('Reset handled by fist gesture');
         }
 
         socket.on('connected', (data) => {

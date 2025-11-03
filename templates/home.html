@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide - VisionBooth</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            background-color: #f1f1f1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #101b40;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 35px 90px;
+            background-color: #f1f1f1;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #101b40;
+            letter-spacing: 0.5px;
+            text-align: left;
+            line-height: 1.2;
+        }
+
+        .logo span {
+            display: block;
+        }
+
+        .nav-menu {
+            background-color: white;
+            border: 2.5px solid #101b40;
+            border-radius: 50px;
+            padding: 6px;
+            display: flex;
+            gap: 5px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 3px 12px rgba(16, 27, 64, 0.12);
+        }
+
+        .nav-btn {
+            padding: 10px 32px;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: transparent;
+            color: #101b40;
+            text-decoration: none;
+        }
+
+        .nav-btn.active {
+            background-color: #101b40;
+            color: white;
+        }
+
+        .nav-btn:hover:not(.active) {
+            background-color: #f1f1f1;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: left;
+            padding: 80px 100px;
+            max-width: 850px;
+            margin: 0 auto;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #101b40;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .steps-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+        }
+
+        .step {
+            font-size: 1.05em;
+        }
+
+        .step-header {
+            font-size: 1.15em;
+            font-weight: 700;
+            color: #101b40;
+            margin-bottom: 5px;
+        }
+
+        .step-content {
+            padding-left: 25px;
+            color: #000;
+        }
+
+        .step-content ul {
+            list-style: none;
+        }
+
+        .step-content li {
+            position: relative;
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+
+        .step-content li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #101b40;
+            font-size: 1.2em;
+        }
+
+        .highlight {
+            font-weight: 700;
+        }
+
+        /* GOT IT Button */
+        .gotit-btn {
+            margin-top: 70px;
+            padding: 15px 55px;
+            font-size: 1.15em;
+            font-weight: 700;
+            color: #101b40;
+            background-color: white;
+            border: 2.5px solid #101b40;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(16, 27, 64, 0.12);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .gotit-btn:hover {
+            background-color: #101b40;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 27, 64, 0.25);
+        }
+
+        .gotit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px 30px;
+            }
+
+            .nav-menu {
+                position: static;
+                transform: none;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .main-content {
+                padding: 40px 30px;
+            }
+
+            .page-title {
+                font-size: 2em;
+                margin-bottom: 40px;
+            }
+
+            .step-header {
+                font-size: 1em;
+            }
+
+            .gotit-btn {
+                font-size: 1em;
+                padding: 12px 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <span>VISION</span>
+            <span>BOOTH</span>
+        </div>
+        <div class="nav-menu">
+            <div class="nav-menu">
+            <a href="/" class="nav-btn">HOME</a>
+            <a href="/guide" class="nav-btn">GUIDE</a>
+            <a href="/index" class="nav-btn">PHOTOBOOTH</a>
+            <a href="/about" class="nav-btn">ABOUT</a>
+</div>
+
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1 class="page-title">How does it work?</h1>
+
+        <div class="steps-container">
+            <div class="step">
+                <p class="step-header"><strong>Step 1:</strong> Set Your Timer!</p>
+                <div class="step-content">
+                    <ul><li>Hold up 1–5 fingers to choose countdown length</li></ul>
+                </div>
+            </div>
+
+            <div class="step">
+                <p class="step-header"><strong>Step 2:</strong> Start the Countdown!</p>
+                <div class="step-content">
+                    <ul><li>Give a thumbs up to begin <span class="highlight">(Want to change? Make a fist to reset)</span></li></ul>
+                </div>
+            </div>
+
+            <div class="step">
+                <p class="step-header"><strong>Step 3:</strong> Strike Your Poses!</p>
+                <div class="step-content">
+                    <ul><li>Get ready for 4 photos — the countdown repeats automatically</li></ul>
+                </div>
+            </div>
+
+            <div class="step">
+                <p class="step-header"><strong>Step 4:</strong> Download Your Strip!</p>
+                <div class="step-content">
+                    <ul><li>Click download to save it</li></ul>
+                </div>
+            </div>
+        </div>
+
+        <a href="/guide" class="gotit-btn">GOT IT!</a>
+    </div>
+</body>
+</html>
