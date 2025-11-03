@@ -13,11 +13,13 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
             background-color: #f1f1f1;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            color: #101b40;
+            overflow-x: hidden;
         }
 
         /* Navigation */
@@ -25,51 +27,50 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 30px 60px;
+            padding: 35px 90px;
             background-color: #f1f1f1;
+            width: 100%;
             max-width: 1400px;
             margin: 0 auto;
-            width: 100%;
         }
 
         .logo {
-            font-size: 1.5em;
+            font-size: 1.2em;
             font-weight: 700;
             color: #101b40;
-            letter-spacing: 1px;
-            flex-shrink: 0;
+            letter-spacing: 0.5px;
+            text-align: left;
+            line-height: 1.2;
         }
 
         .logo span {
             display: block;
-            line-height: 1.2;
         }
 
         .nav-menu {
             background-color: white;
-            border: 3px solid #101b40;
+            border: 2.5px solid #101b40;
             border-radius: 50px;
-            padding: 8px;
+            padding: 6px;
             display: flex;
             gap: 5px;
-            box-shadow: 0 4px 15px rgba(16, 27, 64, 0.1);
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
+            box-shadow: 0 3px 12px rgba(16, 27, 64, 0.12);
         }
 
         .nav-btn {
-            padding: 12px 35px;
+            padding: 10px 32px;
             border: none;
             border-radius: 50px;
-            font-size: 1em;
+            font-size: 0.95em;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             background: transparent;
             color: #101b40;
             text-decoration: none;
-            display: inline-block;
         }
 
         .nav-btn.active {
@@ -78,7 +79,7 @@
         }
 
         .nav-btn:hover:not(.active) {
-            background-color: #f1f1f1;
+            background-color: #e6e6e6;
         }
 
         /* Main Content */
@@ -87,98 +88,103 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 40px 60px;
+            justify-content: flex-start;
+            padding: 30px 20px 50px;
+            text-align: center;
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
         }
 
         .status-title {
-            font-size: 2.5em;
-            font-weight: 600;
+            font-size: 2.2em;
+            font-weight: 700;
             color: #101b40;
-            margin-bottom: 30px;
-            text-align: center;
+            margin-bottom: 20px;
         }
 
         #videoContainer {
             position: relative;
             width: 100%;
-            max-width: 900px;
+            max-width: 850px;
+            aspect-ratio: 16/9; /* FIXED: Maintain consistent aspect ratio */
             background: #000;
             border-radius: 20px;
             overflow: hidden;
-            margin-bottom: 30px;
-            border: 6px solid #000;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin: 0 0 15px 0; /* FIXED: Reduced bottom margin */
+            border: 6px solid #101b40;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
         }
 
         #video, #processedFrame {
+            position: absolute; /* FIXED: Both elements positioned absolutely */
+            top: 0;
+            left: 0;
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover; /* FIXED: Ensure consistent sizing */
             display: block;
         }
 
         #processedFrame {
-            display: none;
+            display: none; /* Hidden by default */
         }
 
         .countdown-display {
             font-size: 6em;
-            font-weight: 700;
+            font-weight: 800;
             color: #101b40;
-            text-align: center;
-            margin: 20px 0;
-            min-height: 100px;
+            margin: 10px 0 15px; /* FIXED: Reduced margins */
+            min-height: 80px; /* FIXED: Reduced min-height */
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .info-section {
-            text-align: center;
-            margin: 20px 0;
+            margin-top: 10px; /* FIXED: Reduced margin */
         }
 
         .info-text {
-            font-size: 1.5em;
-            color: #101b40;
+            font-size: 1.4em;
             font-weight: 600;
-            margin-bottom: 15px;
+            color: #101b40;
+            margin-bottom: 12px; /* FIXED: Reduced margin */
         }
 
         .action-btn {
-            padding: 15px 50px;
-            font-size: 1.2em;
+            padding: 15px 45px;
+            font-size: 1.1em;
             font-weight: 700;
-            color: white;
-            background-color: #101b40;
-            border: 3px solid #101b40;
             border-radius: 50px;
+            background-color: #101b40;
+            color: #fff;
+            border: 3px solid #101b40;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(16, 27, 64, 0.3);
             text-decoration: none;
-            display: inline-block;
+            box-shadow: 0 4px 12px rgba(16,27,64,0.25);
+            margin-top: 5px; /* FIXED: Reduced margin */
         }
 
         .action-btn:hover {
             background-color: white;
             color: #101b40;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(16, 27, 64, 0.4);
+            box-shadow: 0 6px 16px rgba(16,27,64,0.3);
         }
 
         .gesture-display {
-            font-size: 1.2em;
-            color: #000;
-            margin-top: 15px;
+            font-size: 1em;
+            color: #333;
+            margin-top: 12px; /* FIXED: Reduced margin */
+            font-weight: 500;
         }
 
         .progress-bar-container {
             width: 100%;
             max-width: 500px;
-            margin: 20px auto;
+            margin: 15px auto; /* FIXED: Reduced margin */
         }
 
         .progress-bar {
@@ -187,24 +193,21 @@
             background: #ddd;
             border-radius: 50px;
             overflow: hidden;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .progress-fill {
             height: 100%;
+            width: 0%;
             background: #101b40;
-            transition: width 0.3s ease;
             border-radius: 50px;
+            transition: width 0.3s ease;
         }
 
-        #canvas {
-            display: none;
-        }
-
+        /* Photo Strip Preview */
         .strip-preview {
             display: none;
             text-align: center;
-            width: 100%;
+            margin-top: 20px; /* FIXED: Reduced margin */
         }
 
         .strip-preview.show {
@@ -212,19 +215,19 @@
         }
 
         .strip-preview h2 {
-            font-size: 2.5em;
-            color: #101b40;
-            margin-bottom: 30px;
+            font-size: 2em;
             font-weight: 700;
+            margin-bottom: 20px; /* FIXED: Reduced margin */
+            color: #101b40;
         }
 
         .strip-preview img {
-            max-width: 400px;
             width: 100%;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-            margin: 20px 0;
-            border: 5px solid #101b40;
+            max-width: 400px;
+            border-radius: 20px;
+            border: 6px solid #101b40;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            margin-bottom: 25px; /* FIXED: Reduced margin */
         }
 
         .button-group {
@@ -232,80 +235,62 @@
             gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 20px;
         }
 
         .download-btn {
-            padding: 15px 40px;
-            font-size: 1.2em;
+            padding: 14px 40px;
+            font-size: 1.1em;
             font-weight: 700;
-            color: white;
-            background-color: #101b40;
-            border: 3px solid #101b40;
             border-radius: 50px;
-            cursor: pointer;
+            background-color: #101b40;
+            color: white;
+            border: 3px solid #101b40;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(16, 27, 64, 0.3);
         }
 
         .download-btn:hover {
             background-color: white;
             color: #101b40;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(16, 27, 64, 0.4);
         }
 
         .performance-info {
-            font-size: 0.85em;
-            color: #999;
-            margin-top: 15px;
-            text-align: center;
+            font-size: 0.9em;
+            color: #777;
+            margin-top: 15px; /* FIXED: Reduced margin */
         }
 
-        /* Hide elements initially */
         .hidden {
             display: none !important;
         }
 
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 768px) {
             nav {
                 flex-direction: column;
-                gap: 20px;
                 padding: 20px 30px;
             }
 
             .nav-menu {
-                width: 100%;
+                position: static;
+                transform: none;
                 justify-content: center;
                 flex-wrap: wrap;
+                margin-top: 10px;
             }
 
             .nav-btn {
-                padding: 10px 20px;
+                padding: 10px 25px;
                 font-size: 0.9em;
             }
 
-            .main-content {
-                padding: 30px 20px;
-            }
-
             .status-title {
-                font-size: 1.8em;
+                font-size: 1.6em;
             }
 
             .countdown-display {
-                font-size: 4em;
-                min-height: 80px;
-            }
-
-            .info-text {
-                font-size: 1.2em;
-            }
-
-            .button-group {
-                flex-direction: column;
-                align-items: center;
+                font-size: 3.5em;
+                min-height: 60px;
             }
         }
     </style>
@@ -318,17 +303,16 @@
             <span>BOOTH</span>
         </div>
         <div class="nav-menu">
-            <a href="{{ url_for('home') }}" class="nav-btn">HOME</a>
-            <a href="{{ url_for('guide') }}" class="nav-btn active">GUIDE</a>
-            <a href="{{ url_for('index') }}" class="nav-btn">PHOTOBOOTH</a>
-            <a href="{{ url_for('about') }}" class="nav-btn">ABOUT</a>
-
+            <a href="/" class="nav-btn">HOME</a>
+            <a href="/guide" class="nav-btn">GUIDE</a>
+            <a href="/index" class="nav-btn active">PHOTOBOOTH</a>
+            <a href="/about" class="nav-btn">ABOUT</a>
         </div>
     </nav>
 
     <!-- Main Content -->
     <div class="main-content">
-        <div class="status-title" id="statusTitle">Set your timer using your fingers</div>
+        <h1 class="status-title" id="statusTitle">Set your timer using your fingers</h1>
 
         <div id="videoContainer">
             <video id="video" autoplay playsinline></video>
@@ -338,7 +322,7 @@
         <div class="countdown-display" id="countdownDisplay"></div>
 
         <div class="info-section">
-            <div class="info-text" id="infoText">Do a thumbs up when you're ready!</div>
+            <p class="info-text" id="infoText">Do a thumbs up when you're ready!</p>
             <button class="action-btn hidden" id="resetBtn" onclick="resetSession()">Make a fist to change timer</button>
         </div>
 
@@ -348,7 +332,7 @@
             </div>
         </div>
 
-        <div class="gesture-display" id="gestureDisplay">Gesture detected: None</div>
+        <p class="gesture-display" id="gestureDisplay">Gesture detected: None</p>
 
         <div class="strip-preview" id="stripPreview">
             <h2>🎉 Your Photo Strip is Ready!</h2>
@@ -359,10 +343,10 @@
             </div>
         </div>
 
-        <div class="performance-info" id="performanceInfo">FPS: --</div>
+        <p class="performance-info" id="performanceInfo">FPS: --</p>
     </div>
 
-    <canvas id="canvas"></canvas>
+    <canvas id="canvas" style="display: none;"></canvas>
 
     <script>
         const socket = io();
@@ -484,10 +468,11 @@
                 setTimeout(() => capturePhoto(), 100);
             }
             
-            if (currentState !== 'COUNTDOWN') {
+            // FIXED: Always show video, overlay processed frame on top when available
+            if (currentState !== 'COUNTDOWN' && data.frame) {
                 processedFrame.src = data.frame;
                 processedFrame.style.display = 'block';
-                video.style.display = 'none';
+                video.style.display = 'block'; // Keep video as base
             } else {
                 processedFrame.style.display = 'none';
                 video.style.display = 'block';
@@ -579,7 +564,7 @@
                 console.log(`✅ Image captured at ${captureCanvas.width}x${captureCanvas.height}`);
                 
                 socket.emit('save_photo', { image: imageData });
-                console.log('📤 Sent photo to server for saving\n');
+                console.log('📤 Sent photo to server for saving');
             } catch (error) {
                 console.error('❌ Error capturing photo:', error);
             }
@@ -638,7 +623,6 @@
         }
 
         function resetSession() {
-            // This is handled by the fist gesture
             console.log('Reset handled by fist gesture');
         }
 

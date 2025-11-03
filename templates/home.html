@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guide - VisionBooth</title>
+    <title>VisionBooth - Smart Gesture Photo Booth</title>
     <style>
+        /* Reset and global styles */
         * {
             margin: 0;
             padding: 0;
@@ -85,77 +86,82 @@
         .main-content {
             flex: 1;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            text-align: left;
-            padding: 80px 100px;
-            max-width: 850px;
+            justify-content: space-between;
+            padding: 60px 100px;
+            gap: 50px;
+            max-width: 1300px;
             margin: 0 auto;
+        }
+
+        .left-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 1.3s ease-out forwards;
+        }
+
+        .left-section img {
+            max-width: 420px;
+            width: 100%;
+            height: auto;
+            animation: float 3s ease-in-out infinite;
             opacity: 0;
-            animation: fadeIn 1s ease-out forwards;
+            animation: fadeIn 1.5s ease-out forwards, float 3s ease-in-out infinite 1.5s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .right-section {
+            flex: 1;
+            max-width: 520px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeIn 1.8s ease-out forwards;
+            animation-delay: 0.5s;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .page-title {
-            font-size: 2.5em;
-            font-weight: 700;
-            color: #101b40;
-            margin-bottom: 60px;
-            text-align: center;
-        }
-
-        .steps-container {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 35px;
-        }
-
-        .step {
-            font-size: 1.05em;
-        }
-
-        .step-header {
-            font-size: 1.15em;
-            font-weight: 700;
-            color: #101b40;
-            margin-bottom: 5px;
-        }
-
-        .step-content {
-            padding-left: 25px;
-            color: #000;
-        }
-
-        .step-content ul {
-            list-style: none;
-        }
-
-        .step-content li {
-            position: relative;
-            padding-left: 20px;
-            line-height: 1.6;
-        }
-
-        .step-content li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: #101b40;
+        .welcome-text {
             font-size: 1.2em;
+            color: #101b40;
+            margin-bottom: 8px;
+            font-weight: 500;
         }
 
-        .highlight {
-            font-weight: 700;
+        .main-title {
+            font-size: 4em;
+            font-weight: 900;
+            color: #101b40;
+            margin-bottom: 15px;
+            line-height: 1.1;
         }
 
-        /* GOT IT Button */
-        .gotit-btn {
-            margin-top: 70px;
+        .subtitle {
+            font-size: 1.15em;
+            color: #101b40;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .description {
+            font-size: 1.05em;
+            color: #000;
+            line-height: 1.6;
+            margin-bottom: 35px;
+        }
+
+        .start-btn {
             padding: 15px 55px;
             font-size: 1.15em;
             font-weight: 700;
@@ -168,48 +174,67 @@
             box-shadow: 0 4px 12px rgba(16, 27, 64, 0.12);
             text-decoration: none;
             display: inline-block;
+            align-self: flex-start;
         }
 
-        .gotit-btn:hover {
+        .start-btn:hover {
             background-color: #101b40;
             color: white;
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(16, 27, 64, 0.25);
         }
 
-        .gotit-btn:active {
+        .start-btn:active {
             transform: translateY(0);
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
+        /* Responsive Adjustments */
+        @media (max-width: 1024px) {
             nav {
-                flex-direction: column;
-                gap: 20px;
-                padding: 20px 30px;
+                padding: 30px 50px;
             }
 
+            .main-content {
+                flex-direction: column;
+                text-align: center;
+                padding: 40px 50px;
+                gap: 40px;
+            }
+
+            .main-title {
+                font-size: 3em;
+            }
+
+            .right-section {
+                align-items: center;
+            }
+
+            .start-btn {
+                align-self: center;
+            }
+        }
+
+        @media (max-width: 768px) {
             .nav-menu {
                 position: static;
                 transform: none;
                 justify-content: center;
-                flex-wrap: wrap;
+                margin-top: 10px;
             }
 
-            .main-content {
-                padding: 40px 30px;
+            .main-title {
+                font-size: 2.4em;
             }
 
-            .page-title {
-                font-size: 2em;
-                margin-bottom: 40px;
+            .left-section img {
+                max-width: 300px;
             }
 
-            .step-header {
+            .description {
                 font-size: 1em;
             }
 
-            .gotit-btn {
+            .start-btn {
                 font-size: 1em;
                 padding: 12px 40px;
             }
@@ -224,51 +249,29 @@
             <span>BOOTH</span>
         </div>
         <div class="nav-menu">
-            <div class="nav-menu">
-            <a href="/" class="nav-btn">HOME</a>
+            <a href="/" class="nav-btn active">HOME</a>
             <a href="/guide" class="nav-btn">GUIDE</a>
             <a href="/index" class="nav-btn">PHOTOBOOTH</a>
             <a href="/about" class="nav-btn">ABOUT</a>
-</div>
-
         </div>
     </nav>
 
     <!-- Main Content -->
     <div class="main-content">
-        <h1 class="page-title">How does it work?</h1>
-
-        <div class="steps-container">
-            <div class="step">
-                <p class="step-header"><strong>Step 1:</strong> Set Your Timer!</p>
-                <div class="step-content">
-                    <ul><li>Hold up 1–5 fingers to choose countdown length</li></ul>
-                </div>
-            </div>
-
-            <div class="step">
-                <p class="step-header"><strong>Step 2:</strong> Start the Countdown!</p>
-                <div class="step-content">
-                    <ul><li>Give a thumbs up to begin <span class="highlight">(Want to change? Make a fist to reset)</span></li></ul>
-                </div>
-            </div>
-
-            <div class="step">
-                <p class="step-header"><strong>Step 3:</strong> Strike Your Poses!</p>
-                <div class="step-content">
-                    <ul><li>Get ready for 4 photos — the countdown repeats automatically</li></ul>
-                </div>
-            </div>
-
-            <div class="step">
-                <p class="step-header"><strong>Step 4:</strong> Download Your Strip!</p>
-                <div class="step-content">
-                    <ul><li>Click download to save it</li></ul>
-                </div>
-            </div>
+        <div class="left-section">
+            <img src="{{ url_for('static', filename='images/VB_1.png') }}" alt="VisionBooth Camera and Photo Strip">
         </div>
 
-        <a href="/guide" class="gotit-btn">GOT IT!</a>
+        <div class="right-section">
+            <p class="welcome-text">Welcome to</p>
+            <h1 class="main-title">VisionBooth</h1>
+            <p class="subtitle">Strike a pose and let VisionBooth do the rest!</p>
+            <p class="description">
+                Just raise your hand, smile, and let our smart gesture camera capture your perfect shot —
+                hands-free and hassle-free.
+            </p>
+            <a href="/guide" class="start-btn">START</a>
+        </div>
     </div>
 </body>
 </html>
