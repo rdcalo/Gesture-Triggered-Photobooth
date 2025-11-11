@@ -74,8 +74,6 @@ class GestureDetector:
             pinky_pip = landmarks[18]
             pinky_mcp = landmarks[17]
             
-     
-         
             hand_size = self.distance(wrist, middle_mcp)
 
             index_dist = self.distance(index_tip, index_mcp)
